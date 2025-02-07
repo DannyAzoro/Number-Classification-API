@@ -28,21 +28,14 @@ Follow these steps below to run the API on your local machine:
 
 ### Requirement(s)
 
-- Python 3.6 or higher 
-   confirm python is installed with
+- Python 3.6 or higher: 
+confirm python is installed with
 
 ```bash
 python --version
 ```
-if it is not installed, install and verify with
-```bash
-sudo apt install python3.12
-
-python --version
-```
-
-
 - `pip` (Python package installer)
+
 install on windows (VScode) using
 ```bash
 sudo apt install python3-pip
@@ -54,7 +47,7 @@ sudo apt install python3-pip
 
    ```bash
    git clone https://github.com/DannyAzoro/Number-Classification-API.git
-   cd HNG-Numbers-API.git
+   cd Number-Classification-API.git
    ```
 
 2. Create a virtual environment and activate it (just so you can isolate your dependencies)
@@ -85,7 +78,7 @@ source venv/bin/activate
 
 ## Usage
 
-Once the API is up and running, you can make GET requests to the `/api/classify-number` endpoint by passing a query parameter `number`.
+The API will be ready to run now, make GET requests to the `/api/classify-number` endpoint by passing a query parameter `number`.
 
 Example:
 
@@ -95,7 +88,7 @@ http://127.0.0.1:5000/api/classify-number?number=9
 
 ### Expected Output:
 
-For a valid input like `9`, the API will return the following response:
+For a valid input `9`, the API will return the following response:
 
 ```json
 {
@@ -114,7 +107,7 @@ For a valid input like `9`, the API will return the following response:
 
 ### `GET /api/classify-number`
 
-This endpoint accepts a `number` query parameter and returns a JSON response with the classification of the number.
+This takes the `number` and returns a response in JSON format alongside all the properties of the numbers.
 
 #### Parameters:
 
@@ -124,35 +117,32 @@ This endpoint accepts a `number` query parameter and returns a JSON response wit
 
 The API returns a JSON object with the following fields:
 
-- `number`: The input number.
+
+- `fun_fact`: A fun fact about the number (e.g., explaining if it’s an Armstrong number).
+- `digit_sum`: The sum of the digits of the number.
 - `is_prime`: Boolean indicating if the number is prime.
 - `is_perfect`: Boolean indicating if the number is perfect.
 - `properties`: An array of classifications (e.g., prime, perfect, armstrong, even, odd).
-- `digit_sum`: The sum of the digits of the number.
-- `fun_fact`: A fun fact about the number (e.g., explaining if it’s an Armstrong number).
+- `number`: The input number.
 
 ---
 
 ## Response Format
 
-### Successful Response (200 OK)
-
-For a valid input, the response is structured as follows:
+### A Successful Response (200 OK) will read
 
 ```json
 {
-    "number": 371,
+    "number": 9,
     "is_prime": false,
     "is_perfect": false,
     "properties": ["armstrong", "odd"],
-    "digit_sum": 11,
-    "fun_fact": "371 is an Armstrong number because 3^3 + 7^3 + 1^3 = 371"
+    "digit_sum": 9,
+    "fun_fact": "9 is the number of circles of Hell in Dante's Divine Comedy"
 }
 ```
 
-### Error Response (400 Bad Request)
-
-If the input is invalid (e.g., a non-numeric string), the response is:
+### An Error Response (400 Bad Request) - an unsuccessful one will read
 
 ```json
 {
@@ -160,7 +150,7 @@ If the input is invalid (e.g., a non-numeric string), the response is:
     "error": true
 }
 ```
-
+The above will occur when anything other than an integer is used instead of an integer
 ---
 
 ## Code Structure
@@ -185,7 +175,7 @@ If the input is invalid (e.g., a non-numeric string), the response is:
 To test the API:
 
 1. Run the Flask server locally with `python app.py`.
-2. Open **Postman** or **Curl** to send a `GET` request to the endpoint `/api/classify-number?number=<your_number>`.
+2. Open **Postman** or **Curl** to send a `GET` request to the endpoint `/api/classify-number?number=<your_number>` or copy the link and send a `GET` request to that endpoint on your browser
 3. Verify that the response matches the required format for both valid and invalid inputs.
 
 ### Example Requests:
@@ -193,19 +183,19 @@ To test the API:
 - **Valid Request**:
 
   ```bash
-  curl "http://127.0.0.1:5000/api/classify-number?number=371"
+  curl "http://127.0.0.1:5000/api/classify-number?number=9"
   ```
 
   Expected Response:
   
   ```json
   {
-      "number": 371,
+      "number": 9,
       "is_prime": false,
       "is_perfect": false,
       "properties": ["armstrong", "odd"],
-      "digit_sum": 11,
-      "fun_fact": "371 is an Armstrong number because 3^3 + 7^3 + 1^3 = 371"
+      "digit_sum": 9,
+      "fun_fact": "9 is the number of circles of Hell in Dante's Divine Comedy"
   }
   ```
 
@@ -261,7 +251,7 @@ This API is also hosted on **Render**, a cloud platform for deploying web applic
 Once deployed, your API will be publicly accessible at the Render-provided URL, such as:
 
 ```bash
-https://hng-numbers-api.onrender.com/api/classify-number?number=371
+https://number-classification-api-pwew.onrender.com/api/classify-number?number=17
 ```
 
 ---
